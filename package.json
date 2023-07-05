@@ -2,7 +2,7 @@
   "name": "wt-passhelper",
   "private": true,
   "version": "0.3.0",
-  "base": "wt-passhelper",
+  "base": "/wt-passhelper",
   "type": "module",
   "scripts": {
     "dev": "vite",
