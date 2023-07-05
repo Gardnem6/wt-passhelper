@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import dayjs from "dayjs";
 
 import "./App.css";
 import NumberDisplayCard from "./components/NumberDisplayCard";
 import NumberInput from "./components/NumberInput";
-import { setNumberInput } from "./helpers/setNumberInput";
 import { loginsToLevel, loginsToLevelReadable } from "./helpers/loginsToLevel";
 import { pointsFromLogins } from "./helpers/pointsFromLogins";
 
@@ -14,7 +13,6 @@ function App() {
   const [levelProgress, setLevelProgress] = useState(0);
   const [loginCount, setLoginCount] = useState(0);
   const [challengeCount, setChallengeCount] = useState(0);
-  const [goalLevel, setGoalLevel] = useState(0);
 
   const dateFormat = "MMMM D, YYYY";
   const lastDay = dayjs(new Date(2023, 6, 26));
