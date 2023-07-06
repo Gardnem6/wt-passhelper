@@ -5,7 +5,6 @@ import dayjs from "dayjs";
 import "./App.css";
 import NumberDisplayCard from "./components/NumberDisplayCard";
 import NumberInput from "./components/NumberInput";
-import { loginsToLevel, loginsToLevelReadable } from "./helpers/loginsToLevel";
 import { pointsFromLogins } from "./helpers/pointsFromLogins";
 
 function App() {
