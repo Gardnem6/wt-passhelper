@@ -26,7 +26,9 @@ function App() {
   const colClass = "mb-4";
   const cardClass = "h-100";
 
-  const pointsFromChallenges = challengeCount * 30;
+  // you get 45 points if you finish 14 challenges
+  const pointsFromChallenges =
+    challengeCount == 14 ? challengeCount * 30 + 45 : challengeCount * 30;
 
   const otherPoints = Math.max(
     totalPoints - pointsFromLogins(loginCount) - pointsFromChallenges,
@@ -45,11 +47,12 @@ function App() {
     Math.round(possiblePointsLogins + possiblePointsEasy + possiblePointsMed) /
       10;
 
-      const possibleLevelsLoginsEasyMedBp = possibleLevelsLoginsEasyMed + (premiumPoints / 10);
+  const possibleLevelsLoginsEasyMedBp =
+    possibleLevelsLoginsEasyMed + premiumPoints / 10;
 
   return (
     <Container className="wt-passmaster py-4">
-      <h1 className="h3 text-light mb-3">WT Battlepass Calculator</h1>
+      <h1 className="h2 text-light mb-3">WT Battlepass Calculator</h1>
       <p className="text-light mb-4">
         For Battlepass XI, "Her Majesty's Hussar" ending{" "}
         {lastDay.format(dateFormat)}
@@ -97,42 +100,27 @@ function App() {
       </Row>
 
       <Row>
-        <Col className="mb-4 mb-md-0">
+        <Col className={colClass}>
           <NumberDisplayCard title="Levels From Logins">
             {pointsFromLogins(loginCount) / 10}
           </NumberDisplayCard>
         </Col>
-        <Col className="mb-4 mb-md-0">
+        <Col className={colClass}>
           <NumberDisplayCard title="Levels From Challenges">
             {pointsFromChallenges / 10}
           </NumberDisplayCard>
         </Col>
-        <Col className="mb-4 mb-md-0">
+        <Col className={colClass}>
           <NumberDisplayCard title="Levels From Daily and Special Tasks">
             {otherPoints / 10}
           </NumberDisplayCard>
         </Col>
       </Row>
 
-      <hr className="text-light mt-0 mt-md-4 mb-4" />
+      <hr className="text-light mt-0 mb-4" />
 
+      <h3 className="text-light mb-4">Sources of BP Levels</h3>
       <Row>
-        <Col className={colClass}>
-          <NumberDisplayCard title="Logins Needed for Level 50">
-            {loginsToLevelReadable(
-              loginsToLevel(bpLevel, totalPoints, loginCount, 50),
-              bpLevel
-            )}
-          </NumberDisplayCard>
-        </Col>
-        <Col className={colClass}>
-          <NumberDisplayCard title="Logins Needed for Level 75">
-            {loginsToLevelReadable(
-              loginsToLevel(bpLevel, totalPoints, loginCount, 75),
-              bpLevel
-            )}
-          </NumberDisplayCard>
-        </Col>
         <Col className={colClass}>
           <NumberDisplayCard
             title={`Total Possible Levels from ${totalDays} Logins`}
@@ -142,12 +130,41 @@ function App() {
         </Col>
         <Col className={colClass}>
           <NumberDisplayCard
-            title={`Levels Available When Buying Battlepass`}
+            title={`Total Possible Levels from ${totalDays} Easy Tasks`}
           >
+            {(pointsForEasy * totalDays) / 10}
+          </NumberDisplayCard>
+        </Col>
+        <Col className={colClass}>
+          <NumberDisplayCard
+            title={`Total Possible Levels from ${totalDays} Medium tasks`}
+          >
+            {(pointsForMedium * totalDays) / 10}
+          </NumberDisplayCard>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col className={colClass}>
+          <NumberDisplayCard title={`Levels from 14 Challenges`}>
+            {14 * 3}
+          </NumberDisplayCard>
+        </Col>
+        <Col className={colClass}>
+          <NumberDisplayCard title={`Levels from Completing All Challenges`}>
+            {4.5}
+          </NumberDisplayCard>
+        </Col>
+        <Col className={colClass}>
+          <NumberDisplayCard title={`Levels Available When Buying Battlepass`}>
             15
           </NumberDisplayCard>
         </Col>
       </Row>
+
+      <hr className="text-light mt-0 mb-4" />
+
+      <h3 className="text-light mb-4">Your BP Progress</h3>
 
       {/* <Row>
         <Col md={12} className={colClass}>
@@ -185,13 +202,15 @@ function App() {
           </NumberDisplayCard>
         </Col>
       </Row>
-      
-      <hr className="text-light mt-0 mb-4" />
 
       <Row>
-      <Col className={colClass}>
+        <Col className={colClass}>
           <NumberDisplayCard title="Is It Possible To Get the Level 75 Reward Without Challenges and Special Tasks?">
-            {possibleLevelsLoginsEasyMedBp > 75 ? 'Yes' : `${Math.round((75 - possibleLevelsLoginsEasyMedBp) * 10) / 10} Levels Needed`}
+            {possibleLevelsLoginsEasyMedBp > 75
+              ? "Yes"
+              : `${
+                  Math.round((75 - possibleLevelsLoginsEasyMedBp) * 10) / 10
+                } Levels Needed`}
           </NumberDisplayCard>
         </Col>
       </Row>
