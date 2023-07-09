@@ -6,6 +6,7 @@ import "./App.css";
 import NumberDisplayCard from "./components/NumberDisplayCard";
 import NumberInput from "./components/NumberInput";
 import { pointsFromLogins } from "./helpers/pointsFromLogins";
+import ChangelogModal from "./components/ChangelogModal";
 
 function App() {
   const [bpLevel, setBpLevel] = useState(0);
@@ -34,17 +35,22 @@ function App() {
     0
   );
 
-  const possiblePointsLogins = pointsFromLogins(daysRemaining);
+  const possiblePointsLogins =
+    pointsFromLogins(loginCount + daysRemaining) - pointsFromLogins(loginCount);
   const possiblePointsEasy = daysRemaining * pointsForEasy;
   const possiblePointsMed = daysRemaining * pointsForMedium;
 
-  const possibleLevelsLogins = bpLevel + possiblePointsLogins / 10;
+  const possibleLevelsLogins =
+    Math.round(totalPoints + possiblePointsLogins) / 10;
   const possibleLevelsLoginsEasy =
-    bpLevel + Math.round(possiblePointsLogins + possiblePointsEasy) / 10;
+    Math.round(totalPoints + possiblePointsLogins + possiblePointsEasy) / 10;
   const possibleLevelsLoginsEasyMed =
-    bpLevel +
-    Math.round(possiblePointsLogins + possiblePointsEasy + possiblePointsMed) /
-      10;
+    Math.round(
+      totalPoints +
+        possiblePointsLogins +
+        possiblePointsEasy +
+        possiblePointsMed
+    ) / 10;
 
   const possibleLevelsLoginsEasyMedBp =
     possibleLevelsLoginsEasyMed + premiumPoints / 10;
@@ -216,7 +222,11 @@ function App() {
 
       <hr className="text-light mt-0 mb-4" />
 
-      <p className="text-light">Version {APP_VERSION}</p>
+      <div className="d-flex align-items-center justify-content-start gap-2">
+        <p className="text-light">Version {APP_VERSION}</p>
+        <span className='text-white'>|</span>
+        <ChangelogModal />
+      </div>
     </Container>
   );
 }

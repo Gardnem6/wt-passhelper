@@ -9,7 +9,6 @@ test('points available from 22 logins', () => {
     expect(pointsFromLogins(22)).toBe(23);
 });
 
-
 test('points available from 87 logins', () => {
     expect(pointsFromLogins(87)).toBe(232);
 });
