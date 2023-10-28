@@ -15,9 +15,9 @@ function App() {
   const [challengeCount, setChallengeCount] = useState(0);
 
   const dateFormat = "MMMM D, YYYY";
-  const lastDay = dayjs(new Date(2023, 9, 25));
+  const lastDay = dayjs(new Date(2024, 1, 24));
   const daysRemaining = lastDay.diff(dayjs(), "day");
-  const totalDays = 91;
+  const totalDays = 92;
   const totalPoints = bpLevel * 10 + levelProgress;
   const pointsForEasy = 2;
   const pointsForMedium = 3;
@@ -59,7 +59,7 @@ function App() {
     <Container className="wt-passmaster py-4">
       <h1 className="h2 text-light mb-3">WT Battlepass Calculator</h1>
       <p className="text-light mb-4">
-        For Battlepass XII, "Armor breaking Ambusher" ending{" "}
+        For Battlepass XIII, "Tropical Storm" ending{" "}
         {lastDay.format(dateFormat)}
       </p>
       <p className="text-light mb-4">
