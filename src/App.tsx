@@ -15,7 +15,7 @@ function App() {
   const [challengeCount, setChallengeCount] = useState(0);
 
   const dateFormat = "MMMM D, YYYY";
-  const lastDay = dayjs(new Date(2024, 1, 24));
+  const lastDay = dayjs(new Date(2024, 0, 24));
   const daysRemaining = lastDay.diff(dayjs(), "day");
   const totalDays = 92;
   const totalPoints = bpLevel * 10 + levelProgress;
