@@ -1,3 +1,6 @@
+## 0.4.3
+- Support battlepass 14
+
 ## 0.4.2
 - Support battlepass 13
 
