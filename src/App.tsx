@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import dayjs from "dayjs";
 
 import "./App.css";
@@ -7,15 +7,20 @@ import NumberDisplayCard from "./components/NumberDisplayCard";
 import NumberInput from "./components/NumberInput";
 import { pointsFromLogins } from "./helpers/pointsFromLogins";
 import ChangelogModal from "./components/ChangelogModal";
+import DateInput from "./components/DateInput";
 
 function App() {
+  const originalLastDay = dayjs(new Date(2025, 0, 22));
+
   const [bpLevel, setBpLevel] = useState(0);
   const [levelProgress, setLevelProgress] = useState(0);
   const [loginCount, setLoginCount] = useState(0);
   const [challengeCount, setChallengeCount] = useState(0);
+  const [lastDayOverride, setLastDayOverride] = useState('');
+  const [lastDay, setLastDay] = useState(originalLastDay);
 
   const dateFormat = "MMMM D, YYYY";
-  const lastDay = dayjs(new Date(2024, 9, 23));
+
   const daysRemaining = lastDay.diff(dayjs(), "day");
   const totalDays = 91;
   const totalPoints = bpLevel * 10 + levelProgress;
@@ -55,11 +60,25 @@ function App() {
   const possibleLevelsLoginsEasyMedBp =
     possibleLevelsLoginsEasyMed + premiumPoints / 10;
 
+  const overrideLastDay = () => {
+    const newDate = dayjs(lastDayOverride);
+    if (newDate.isValid()) {
+      setLastDay(newDate);
+    } else {
+      window.alert("Please enter a valid date");
+    }
+  }
+
+  const resetLastDay = () => {
+    setLastDayOverride('');
+    setLastDay(originalLastDay);
+  }
+
   return (
     <Container className="wt-passmaster py-4">
       <h1 className="h2 text-light mb-3">WT Battlepass Calculator</h1>
       <p className="text-light mb-4">
-        For Battlepass XVI, "Skilled Marksman" ending{" "}
+        For Battlepass XVII, "Guided Fury" ending{" "}
         {lastDay.format(dateFormat)}
       </p>
       <p className="text-light mb-4">
@@ -69,6 +88,30 @@ function App() {
         on <a href="https://github.com/Gardnem6/wt-passhelper/issues">GitHub</a>
         . I'll do my best to take care of issues.
       </p>
+
+      <Row>
+        <Col className={`${colClass} d-flex align-items-end justify-content-start`} md="auto">
+          <DateInput 
+            label='End date override'
+            callback={setLastDayOverride}
+            value={lastDayOverride}
+          />
+
+          <Button variant="light" className="ms-4" onClick={overrideLastDay}>
+            Set Date
+          </Button>
+
+          {lastDay.diff(originalLastDay, 'date') !== 0 &&
+            <Button variant="outline-info" className="ms-4" onClick={resetLastDay}>
+              Reset
+            </Button>
+          }
+        </Col>
+        <p className="text-light mt-0 mb-4">If the tool is out of date, you can put the new end date here.</p>
+      </Row>
+      
+      <hr className="text-light mt-0 mb-4" />
+
       <Row>
         <Col className={colClass} md="auto">
           <NumberDisplayCard title="Battlepass Days Remaining" pClassName="h1">

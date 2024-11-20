@@ -1,3 +1,7 @@
+## 0.5.0
+- Support battlepass 17
+- add date override tool for when I forget to update the calculator
+
 ## 0.4.5
 - Support battlepass 16
 
