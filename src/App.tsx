@@ -10,7 +10,7 @@ import ChangelogModal from "./components/ChangelogModal";
 import DateInput from "./components/DateInput";
 
 function App() {
-  const originalLastDay = dayjs(new Date(2025, 0, 22));
+  const originalLastDay = dayjs(new Date(2025, 6, 23));
 
   const [bpLevel, setBpLevel] = useState(0);
   const [levelProgress, setLevelProgress] = useState(0);
@@ -78,7 +78,7 @@ function App() {
     <Container className="wt-passmaster py-4">
       <h1 className="h2 text-light mb-3">WT Battlepass Calculator</h1>
       <p className="text-light mb-4">
-        For Battlepass XVII, "Guided Fury" ending{" "}
+        For Battlepass XIX, "First Sample" ending{" "}
         {lastDay.format(dateFormat)}
       </p>
       <p className="text-light mb-4">
