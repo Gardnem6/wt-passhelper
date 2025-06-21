@@ -1,6 +1,8 @@
-## 0.5.1
+## 0.6.0
 
 - Support battlepass 19
+- Updated deployment pipeline to latest
+- Updated dependencies to latest
 
 ## 0.5.0
 
